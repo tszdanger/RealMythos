@@ -1,0 +1,31 @@
+name: Roadmap proposal
+description: Propose a roadmap item or refinement.
+title: "[Roadmap] "
+labels: ["type:roadmap"]
+body:
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Stage
+      options:
+        - Stage 1 Dataset
+        - Stage 2 Model
+        - Stage 3 Reproducible Environments
+        - Stage 4 Trace Scaffold
+        - Cross-stage
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why is this roadmap item useful?
+    validations:
+      required: true
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Proposed deliverables
+      description: List concrete outputs or acceptance criteria.
+    validations:
+      required: true

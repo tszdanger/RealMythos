@@ -1,0 +1,35 @@
+# Local environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Generated outputs
+output/
+outputs/
+artifacts/
+checkpoints/
+logs/
+_site_preview/
+docs/_site/
+cyberreport/
+*.log
+
+# Large release artifacts should be published through Hugging Face or GitHub Releases.
+*.jsonl
+*.parquet
+*.tar
+*.tar.gz
+*.zip
+*.safetensors
+*.bin
+*.pt
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

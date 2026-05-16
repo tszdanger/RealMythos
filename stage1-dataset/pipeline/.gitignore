@@ -1,0 +1,66 @@
+# Secrets
+.env
+
+# Large repos / data
+PrimeVul/
+data/megavul/
+data/cvefixes/
+data/diversevul/
+data/crossvul/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Personal case extraction scripts and output
+data/primevul_cwe_mini_final/extract_personal_subset.py
+data/primevul_cwe_mini_final/personal_*.jsonl
+
+# Temp / output files
+*.jsonl
+*.log
+output/
+output_*/
+resource/
+test/info.md
+test/test_qwen.py
+
+# Personal output directory
+output_personal/
+output_personal_*/
+output_tasks/
+
+
+# Generated dataset summaries
+data/primevul_cwe_mini_final/SUMMARY.md
+data/primevul_cwe_mini_final/summary.json
+data/curation/*/tasks/
+data/curation/*/summary.json
+data/curation/*/source_priority.json
+
+# LLM classification cache
+reasoning_expr/prompt_templates/llm_classification_cache.json
+reasoning_expr/build_diversevul_eval_set.py
+reasoning_expr/eval.py
+reasoning_expr/experiment_overview.md
+reasoning_expr/experiment_overview.pdf
+reasoning_expr/experiment_overview_v3.md
+reasoning_expr/experiment_overview_v3.pdf
+reasoning_expr/poc_eval_enhanced/
+reasoning_expr/research_plan_neurips_overview.md
+
+# Large generated outputs
+data/curation/*/
+.claude/
+artifacts/
+hf_release/
+results_20260514/

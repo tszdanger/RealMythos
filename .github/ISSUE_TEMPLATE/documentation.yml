@@ -1,0 +1,19 @@
+name: Documentation issue
+description: Report a documentation gap, ambiguity, or correction.
+title: "[Docs] "
+labels: ["area:docs"]
+body:
+  - type: textarea
+    id: issue
+    attributes:
+      label: What should be improved?
+      description: Describe the documentation issue or missing context.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change
+      description: If you have a proposed wording or structure, include it here.
+    validations:
+      required: false

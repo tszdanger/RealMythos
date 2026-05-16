@@ -1,0 +1,13 @@
+sources:
+  - name: primevul
+    priority: 100
+    path: data/primevul_train_paired.jsonl
+  - name: megavul
+    priority: 80
+    path: data/megavul
+  - name: reposvul
+    priority: 70
+    path: data/ReposVul
+  - name: cvefixes
+    priority: 60
+    path: data/cvefixes

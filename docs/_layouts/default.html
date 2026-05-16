@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="{{ '/' | relative_url }}">RealMythos</a>
+        <div class="nav-links">
+          <a href="{{ '/roadmap.html' | relative_url }}">Roadmap</a>
+          <a href="{{ '/stage1-dataset.html' | relative_url }}">Dataset</a>
+          <a href="https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing">Report</a>
+          <a href="{{ '/responsible-use.html' | relative_url }}">Responsible Use</a>
+          <a href="{{ '/authors.html' | relative_url }}">Authors</a>
+        </div>
+      </nav>
+    </header>
+    <main class="page">
+      {{ content }}
+    </main>
+    <footer class="site-footer">
+      <span>RealMythos is an independent personal-time project.</span>
+      <a href="https://huggingface.co/datasets/RealMythos/RealMythosReasoning">Hugging Face Dataset</a>
+      <a href="https://github.com/tszdanger/RealMythos">GitHub Repository</a>
+      <a href="https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing">Technical Report</a>
+    </footer>
+  </body>
+</html>

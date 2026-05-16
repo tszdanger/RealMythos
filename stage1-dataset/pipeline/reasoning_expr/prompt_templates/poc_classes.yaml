@@ -1,0 +1,472 @@
+# Vulnerability class definitions for PoC prompt routing.
+#
+# The static CWE map is intentionally broad: the mini PrimeVul extraction keeps
+# high-level CWE IDs as well as concrete weakness IDs, so each class groups CWEs
+# by the PoC shape that should be generated rather than by taxonomy alone.
+#
+# Schema version: 2
+
+classes:
+  memory_bounds:
+    display_name: "Memory bounds and buffer errors"
+    cwe_codes:
+      - CWE-118
+      - CWE-119
+      - CWE-120
+      - CWE-121
+      - CWE-122
+      - CWE-125
+      - CWE-126
+      - CWE-127
+      - CWE-129
+      - CWE-131
+      - CWE-193
+      - CWE-787
+      - CWE-788
+      - CWE-824
+    analysis_focus: >-
+      Analyze array indexes, length fields, buffer-size calculations, pointer
+      offsets, boundary conditions, and object lifetime. Explain how
+      attacker-controlled lengths, indexes, or input bytes reach the dangerous
+      memory access.
+    poc_format: >-
+      Prefer a C/C++ harness with required includes, struct/type definitions,
+      a copied target function or minimal call entry point, carefully chosen
+      buffers, lengths, and indexes, and verification through AddressSanitizer,
+      a crash signal, return values, or memory-access evidence.
+    required_components:
+      - "Required includes, struct/type definitions, and a target call entry point"
+      - "Attacker-controlled buffer, length field, index value, or object pointer"
+      - "Minimal input that triggers out-of-bounds or uninitialized access"
+      - "Verification through a crash, ASAN report, abnormal return, or access trace"
+
+  numeric_calculation:
+    display_name: "Integer and numeric calculation errors"
+    cwe_codes:
+      - CWE-172
+      - CWE-189
+      - CWE-190
+      - CWE-191
+      - CWE-369
+      - CWE-681
+      - CWE-682
+    analysis_focus: >-
+      Analyze overflow, underflow, divide-by-zero, signedness conversion,
+      truncation, rounding, unit conversion, and incorrect formulas. Explain
+      how numeric values propagate from input to an unsafe allocation, loop,
+      permission check, or other security boundary.
+    poc_format: >-
+      Generate a C harness or Python script that passes boundary values, large
+      values, negative values, zero, or values whose type conversion changes
+      semantics, then demonstrate the resulting under-allocation, out-of-bounds
+      access, exception, authorization bypass, or denial of service.
+    required_components:
+      - "Boundary value set such as 0, -1, INT_MAX, SIZE_MAX, or a truncated value"
+      - "Target calculation expression or function call"
+      - "Printed comparison of values before and after the calculation"
+      - "Verification of abnormal behavior such as divide-by-zero, overflowed small allocation, or wrong branch"
+
+  input_validation:
+    display_name: "Input validation and format-checking flaws"
+    cwe_codes:
+      - CWE-20
+      - CWE-1286
+      - CWE-1287
+    analysis_focus: >-
+      Analyze whether the code validates input syntax, count, range, field
+      combinations, null values, and illegal states completely. Distinguish a
+      pure validation flaw from later memory, authorization, or protocol issues.
+    poc_format: >-
+      Generate a C harness or Python script that builds malformed formats,
+      missing fields, duplicate fields, invalid combinations, extreme counts,
+      or null values, then directly calls the target function or simulates the
+      real entry point to show the validation bypass.
+    required_components:
+      - "Malformed input or invalid field combination"
+      - "Target parser or validation function call"
+      - "Expected rejection versus actual acceptance check"
+      - "Clear pass/fail output"
+
+  injection_interpreter:
+    display_name: "Injection and interpreter-boundary flaws"
+    cwe_codes:
+      - CWE-74
+      - CWE-77
+      - CWE-78
+      - CWE-89
+      - CWE-93
+      - CWE-94
+      - CWE-116
+      - CWE-134
+      - CWE-707
+      - CWE-917
+    analysis_focus: >-
+      Analyze whether user-controlled data reaches a command executor, SQL or
+      expression interpreter, code generator, format string, HTTP header, or
+      another interpreted boundary without escaping, encoding, parameterization,
+      or context isolation.
+    poc_format: >-
+      Generate a Python or C PoC appropriate for the target environment and
+      show how the malicious string flows from the input point to the dangerous
+      sink. Command, SQL, and format-string PoCs should use safe local commands
+      or local simulation by default and avoid destructive actions.
+    required_components:
+      - "Malicious input string and its encoded or escaped form when relevant"
+      - "Data-flow simulation from input point to dangerous sink"
+      - "Dangerous function, query, command, or formatting call"
+      - "Observable injection effect such as echo, syntax change, extra field, or leaked formatting output"
+
+  web_network:
+    display_name: "Web, HTTP, and cross-boundary request flaws"
+    cwe_codes:
+      - CWE-79
+      - CWE-352
+      - CWE-444
+      - CWE-601
+      - CWE-918
+      - CWE-1021
+    analysis_focus: >-
+      Analyze script injection, CSRF, request smuggling, open redirect, SSRF,
+      iframe/window boundaries, and origin isolation in browser or HTTP
+      scenarios. Explain how attacker-controlled URLs, headers, DOM state,
+      forms, or cross-origin requests affect a security decision.
+    poc_format: >-
+      Generate HTML/JavaScript or a Python HTTP PoC. Browser flaws should
+      include a complete HTML page. Server/protocol flaws should include HTTP
+      request assembly, a local listener, or safe echo verification, avoiding
+      real external-network scanning.
+    required_components:
+      - "Malicious URL, header, form, iframe, or DOM payload"
+      - "Browser event or HTTP request flow"
+      - "Observation point showing the target security boundary was crossed"
+      - "Local, safe, and repeatable verification output"
+
+  path_filesystem:
+    display_name: "Path, symlink, and file-exposure flaws"
+    cwe_codes:
+      - CWE-22
+      - CWE-59
+      - CWE-61
+      - CWE-552
+    analysis_focus: >-
+      Analyze whether path normalization, directory traversal, symlink
+      following, file permissions, public directories, or file-operation TOCTOU
+      behavior allow unexpected read, write, overwrite, or disclosure.
+    poc_format: >-
+      Generate a Python script or C harness that creates safe test files,
+      symlinks, relative paths, or encoded paths inside a temporary directory,
+      calls the target logic, and verifies whether unauthorized file access
+      occurs. Keep all writes inside the temporary directory.
+    required_components:
+      - "Temporary directory and safe test file or symlink setup"
+      - "Traversal path, symlink path, or public-file path construction"
+      - "Target function or service invocation"
+      - "Unauthorized access verification and cleanup logic"
+
+  access_control:
+    display_name: "Authentication, authorization, and access-control flaws"
+    cwe_codes:
+      - CWE-254
+      - CWE-264
+      - CWE-269
+      - CWE-273
+      - CWE-276
+      - CWE-281
+      - CWE-284
+      - CWE-285
+      - CWE-287
+      - CWE-290
+      - CWE-307
+      - CWE-639
+      - CWE-732
+      - CWE-862
+      - CWE-863
+    analysis_focus: >-
+      Analyze whether authentication, authorization, privilege dropping,
+      default permissions, user/role/object binding, rate limits, or access
+      control state is missing or checked incorrectly. Explain how attacker
+      identity, resource IDs, capability bits, or call context bypass checks.
+    poc_format: >-
+      Generate a Python or C PoC that models a normal user, low-privilege role,
+      forged identity, object-ID substitution, or missing capability bit, then
+      verifies unauthorized access, privilege escalation, authentication bypass,
+      or account lockout/rate-limit bypass.
+    required_components:
+      - "Attacker identity, permission, or role state model"
+      - "Protected resource or operation construction"
+      - "Target authorization/authentication function or system-call entry point"
+      - "Expected rejection versus actual allow verification"
+
+  credentials_session:
+    display_name: "Credential, session, and key-management flaws"
+    cwe_codes:
+      - CWE-255
+      - CWE-522
+      - CWE-613
+      - CWE-798
+    analysis_focus: >-
+      Analyze whether passwords, tokens, sessions, hard-coded keys, expiry
+      policies, and credential storage or transmission are safe. Explain how
+      credentials can be predicted, reused, disclosed, or accepted after expiry.
+    poc_format: >-
+      Generate a Python PoC or minimal service simulation showing hard-coded
+      credential use, weak session reuse, access after expiry, plaintext
+      credential disclosure, or credential replay. Do not include real
+      production credentials.
+    required_components:
+      - "Test credential, token, or session state construction"
+      - "Login, verification, or session-reuse flow"
+      - "Verification of bypass, disclosure, or expiry failure"
+      - "Explicit use of fictional or local test credentials"
+
+  crypto_protocol:
+    display_name: "Cryptography, certificate, and protocol-integrity flaws"
+    cwe_codes:
+      - CWE-294
+      - CWE-295
+      - CWE-310
+      - CWE-311
+      - CWE-320
+      - CWE-326
+      - CWE-327
+      - CWE-328
+      - CWE-331
+      - CWE-345
+      - CWE-346
+      - CWE-347
+      - CWE-354
+    analysis_focus: >-
+      Analyze encryption strength, randomness, certificate/hostname validation,
+      signatures, integrity checks, key exchange, replay protection, origin
+      checks, and protocol state machines for flaws.
+    poc_format: >-
+      Generate a Python or C PoC that constructs weak randomness or algorithm
+      parameters, forged certificates or signatures, replayed messages, missing
+      integrity fields, or abnormal protocol states, then verifies that the
+      target logic accepts them incorrectly. Keep network PoCs local.
+    required_components:
+      - "Weak parameters, forged certificate/signature, replay message, or abnormal state"
+      - "Target crypto or protocol verification function call"
+      - "Accepted versus rejected result comparison"
+      - "Safe local simulation or payload output"
+
+  side_channel:
+    display_name: "Side-channel and observable-difference flaws"
+    cwe_codes:
+      - CWE-203
+      - CWE-208
+      - CWE-212
+      - CWE-385
+    analysis_focus: >-
+      Analyze whether timing, error messages, response size, resource usage,
+      incomplete cleanup, or observable behavior differences disclose sensitive
+      information. Explain why two input groups are distinguishable.
+    poc_format: >-
+      Generate a Python sampling script or C harness that repeatedly calls the
+      target API, collects timing/error/response differences, and prints a
+      statistical comparison. For incomplete memory cleanup, use a local buffer
+      simulation.
+    required_components:
+      - "At least two comparable input groups"
+      - "Repeated sampling or leak-reading logic"
+      - "Statistical metrics such as mean, difference, error type, or response length"
+      - "Observable leakage conclusion"
+
+  information_disclosure:
+    display_name: "Information disclosure and log/error exposure"
+    cwe_codes:
+      - CWE-200
+      - CWE-209
+      - CWE-532
+    analysis_focus: >-
+      Analyze whether sensitive information is exposed through error messages,
+      logs, debug output, response bodies, uncleared buffers, or exceptional
+      paths. Distinguish public information from sensitive context.
+    poc_format: >-
+      Generate a Python or C PoC that triggers a specific error, log, or read
+      path and shows how sensitive fields are emitted. Do not use real secrets;
+      use test tokens or local dummy values.
+    required_components:
+      - "Test sensitive value or internal state setup"
+      - "Error, log, or response trigger input"
+      - "Target output capture"
+      - "Leaked field location and verification"
+
+  race_condition:
+    display_name: "Race-condition and concurrent-state flaws"
+    cwe_codes:
+      - CWE-361
+      - CWE-362
+      - CWE-364
+      - CWE-366
+      - CWE-367
+      - CWE-667
+    analysis_focus: >-
+      Analyze whether shared resources, locks, reference counts, check/use
+      separation, signal handling, thread state, or object release create a race
+      window. Explain how two concurrent actions interleave to trigger the flaw.
+    poc_format: >-
+      Generate a Python multi-thread/multi-process script or C pthread harness
+      using barriers, loops, short sleeps, or file/object state switching to
+      widen the race window, then verify abnormal state, crash, or unauthorized
+      result.
+    required_components:
+      - "Two or more concurrent execution paths"
+      - "Race-window construction and amplification mechanism"
+      - "Shared resource or state observation point"
+      - "Abnormal result detection and iteration statistics"
+
+  resource_lifetime:
+    display_name: "Resource lifetime, release, and null-pointer flaws"
+    cwe_codes:
+      - CWE-399
+      - CWE-401
+      - CWE-404
+      - CWE-415
+      - CWE-416
+      - CWE-417
+      - CWE-476
+      - CWE-672
+      - CWE-763
+      - CWE-772
+    analysis_focus: >-
+      Analyze whether memory, file descriptors, handles, object references,
+      locks, and temporary resources are leaked, double-freed, used after free,
+      released incorrectly, dereferenced when null, or left uncleared on error
+      paths.
+    poc_format: >-
+      Generate a C harness or Python script that constructs a failure branch,
+      repeated call, use-after-release access, exceptional return, or loop that
+      triggers a leak or crash. For leaks, print resource counts or memory-growth
+      evidence.
+    required_components:
+      - "Resource allocation or acquisition path"
+      - "Failure branch, double-release, or use-after-release trigger"
+      - "Target function call sequence"
+      - "Leak, crash, UAF, or null-pointer result verification"
+
+  resource_exhaustion:
+    display_name: "Resource exhaustion and infinite-loop flaws"
+    cwe_codes:
+      - CWE-400
+      - CWE-674
+      - CWE-770
+      - CWE-789
+      - CWE-799
+      - CWE-834
+      - CWE-835
+    analysis_focus: >-
+      Analyze whether loop exit conditions, recursion depth, request frequency,
+      allocation caps, queue growth, timeouts, or rate limits are missing.
+      Explain how an attacker amplifies CPU, memory, file descriptor, thread, or
+      network resource consumption.
+    poc_format: >-
+      Generate a Python or C PoC that uses safely bounded loops, recursion,
+      batched requests, or large inputs to trigger resource growth and print
+      resource metrics. Avoid uncontrolled exhaustion of the current machine.
+    required_components:
+      - "Controlled amplification input or repeated trigger"
+      - "Target function or service invocation"
+      - "Resource metric collection such as time, memory, FD count, or iteration count"
+      - "Safe stop condition"
+
+  parser_deserialization:
+    display_name: "Parser, deserialization, and protocol-ambiguity flaws"
+    cwe_codes:
+      - CWE-19
+      - CWE-241
+      - CWE-502
+      - CWE-697
+      - CWE-843
+    analysis_focus: >-
+      Analyze whether file/protocol/object parsing, deserialization, comparison
+      rules, type interpretation, or multi-parser ambiguity causes bypass,
+      type confusion, wrong object creation, or activation of unsafe objects.
+    poc_format: >-
+      Generate a Python payload generator, HTML/HTTP request builder, or C
+      harness that constructs a minimal malformed file, serialized object,
+      protocol message, or type tag, then shows how the parse result differs
+      from the expected result.
+    required_components:
+      - "Malformed file, protocol message, or serialized object bytes/text"
+      - "Parser, deserializer, or comparison entry point call"
+      - "Parse result, type, or routing difference"
+      - "Safe local verification method"
+
+  api_error_handling:
+    display_name: "API misuse, return-value, and exception-handling flaws"
+    cwe_codes:
+      - CWE-252
+      - CWE-253
+      - CWE-617
+      - CWE-676
+      - CWE-703
+      - CWE-754
+      - CWE-755
+    analysis_focus: >-
+      Analyze whether return values, error codes, exceptions, assertions,
+      dangerous APIs, or error branches are mishandled or ignored. Explain how
+      an error result continues into an unsafe state.
+    poc_format: >-
+      Generate a C harness or Python script that uses a stub/mock to force an
+      API to return failure, NULL, an exception, or a dangerous value, then
+      verifies that the caller mishandles it and continues down the unsafe path.
+    required_components:
+      - "Controllable API return value or exceptional condition"
+      - "Target error-handling path invocation"
+      - "Unsafe state after the error is ignored or misclassified"
+      - "Crash, error output, or inconsistent-state verification"
+
+  state_initialization:
+    display_name: "State initialization, ownership, and control-flow errors"
+    cwe_codes:
+      - CWE-16
+      - CWE-17
+      - CWE-388
+      - CWE-664
+      - CWE-665
+      - CWE-668
+      - CWE-670
+      - CWE-704
+      - CWE-908
+      - CWE-909
+    analysis_focus: >-
+      Analyze whether object initialization, default configuration, ownership
+      boundaries, control flow, type conversion, cross-component state sync, or
+      uninitialized resources lead to incorrect security decisions. For
+      high-level CWEs, infer the concrete triggerable state error from the code.
+    poc_format: >-
+      Generate a C harness or Python state-machine simulation that constructs
+      missing initialization, bad defaults, wrong type conversion, state
+      desynchronization, or abnormal control flow, then shows the bypass or
+      crash.
+    required_components:
+      - "Initial state, default configuration, or object-field setup"
+      - "Call sequence that triggers the wrong state transition"
+      - "Target function or state-machine entry point"
+      - "Wrong state, bypass result, or crash verification"
+
+classification_fallback:
+  system_prompt: >-
+    You are a security vulnerability classification expert. Given a CVE
+    description, CWE labels, and vulnerable code, decide the most suitable PoC
+    shape and analysis focus. The output must help generate a verifiable PoC
+    rather than provide a generic CWE explanation.
+  user_prompt_template: |
+    Given the following CVE description, CWE labels, and vulnerable code, determine:
+    1. What type of PoC is best suited to trigger this vulnerability?
+    2. Which code paths and attacker-controlled inputs should the analysis focus on?
+    3. Which required components should the PoC contain?
+
+    CVE: {cve}
+    Description: {cve_desc}
+    CWE: {cwe}
+    Code:
+    ```c
+    {vuln_func}
+    ```
+
+    Return only JSON, without markdown or explanatory prose. JSON fields:
+    - analysis_focus: English, 80-160 words, focused on code paths and the vulnerability mechanism
+    - poc_format: English, 80-160 words, describing PoC language/shape/verification method
+    - required_components: English string array, 4-6 items, each item a required PoC component
