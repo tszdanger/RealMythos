@@ -1,5 +1,7 @@
 # RealMythos
 
+Languages: [English](README.md) | [简体中文](README.zh-CN.md) | [한국어](README.ko.md) | [Deutsch (Schweiz)](README.de-CH.md)
+
 [![Stage 1](https://img.shields.io/badge/Stage%201-Dataset%20Complete-2ea44f)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
 [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-RealMythosReasoning-ffcc4d)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
 [![Technical Report](https://img.shields.io/badge/Technical%20Report-Google%20Drive%20Draft-b31b1b)](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing)
@@ -160,6 +162,9 @@ The full dataset is hosted through **Hugging Face**. This GitHub repository host
 |-- .github/
 |-- .gitignore
 |-- README.md
+|-- README.zh-CN.md
+|-- README.ko.md
+|-- README.de-CH.md
 |-- ROADMAP.md
 |-- CONTRIBUTING.md
 |-- SECURITY.md
