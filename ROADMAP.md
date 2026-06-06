@@ -39,8 +39,10 @@ The long-term goal is to provide:
 
 ## Stage 1: Security Reasoning Dataset
 
-**Status:** Completed; Hugging Face release prepared
-**Target release:** May 2026  
+**Status:** Completed; Hugging Face release published
+
+**Release:** May 2026
+
 **Primary location:** [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning), with GitHub documentation and release metadata
 
 Stage 1 focuses on releasing a high-quality security reasoning dataset derived from real-world vulnerability data.
@@ -75,10 +77,15 @@ Stage 1 focuses on releasing a high-quality security reasoning dataset derived f
 
 ## Stage 2: Open Security Reasoning Model
 
-**Status:** Completed internally; public packaging in progress  
-**Target release:** Late May 2026
+**Status:** Public model released
 
-Stage 2 releases an open model trained using the Stage 1 reasoning data. Internal experiments show an average performance improvement of more than 25% over the selected baseline setup. The public release will document the exact evaluation setting before making final performance claims.
+**Release:** June 2026
+
+**Primary location:** [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
+
+Stage 2 releases an open model trained using the Stage 1 reasoning data. The first public checkpoint, `pocwriter-v1`, is a full-parameter SFT of [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) trained on [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning). It is intended for authorized security research, C/C++ vulnerability analysis, controlled PoC drafting, and triage/write-up assistance.
+
+Internal experiments show an average performance improvement of more than 25% over the selected baseline setup. Public benchmark claims should continue to be tied to exact evaluation settings, baseline definitions, and reproducibility artifacts.
 
 ### Goals
 
@@ -87,16 +94,15 @@ Stage 2 releases an open model trained using the Stage 1 reasoning data. Interna
 - Release model artifacts or adapters when appropriate
 - Establish baseline results for future community comparison
 
-### Planned Deliverables
+### Release Deliverables
 
-- RealMythos model checkpoint or adapter
-- Training configuration
-- Evaluation scripts
-- Baseline comparison report
-- Model card
-- Inference examples
-- Safety and limitation notes
-- Reproducibility instructions
+- Public model checkpoint on Hugging Face: [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
+- Model card with base model, training data, intended use, limitations, and license metadata
+- Inference example for `transformers`
+- Safety and limitation notes for authorized-use-only PoC drafting
+- Training metadata identifying the Stage 1 dataset and SFT setup
+
+Evaluation scripts, baseline comparison details, and full reproducibility instructions remain follow-up documentation items before making stronger public benchmark claims.
 
 ### Evaluation Focus
 
@@ -108,10 +114,11 @@ Stage 2 releases an open model trained using the Stage 1 reasoning data. Interna
 
 ### Success Criteria
 
-- The reported performance improvement is supported by public evaluation artifacts
-- Users can reproduce the evaluation setup
-- Model behavior, limitations, and intended use are documented
-- The model release is linked to the exact dataset version used for training
+- Model behavior, limitations, and intended use are documented in the model card
+- The model release is linked to the Stage 1 dataset used for training
+- Users can load the model through standard Hugging Face tooling
+- Reported performance improvements are supported by public evaluation artifacts before being presented as benchmark claims
+- Future model releases include clearer evaluation and reproducibility packages
 
 ## Stage 3: Reproducible Software Environments
 
@@ -236,4 +243,4 @@ Each public release should include:
 
 ## Disclaimer
 
-This roadmap reflects current priorities as of May 2026. Dates, scope, and artifacts may change based on quality results, safety review, infrastructure constraints, and community feedback.
+This roadmap reflects current priorities as of June 2026. Dates, scope, and artifacts may change based on quality results, safety review, infrastructure constraints, and community feedback.

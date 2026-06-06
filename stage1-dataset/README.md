@@ -2,9 +2,9 @@
 
 Stage 1 is the first RealMythos release artifact. It focuses on a high-quality security reasoning dataset derived from real-world vulnerability data.
 
-**Status:** Completed; Hugging Face release prepared
+**Status:** Completed; Hugging Face release published
 
-The Hugging Face dataset repository has been prepared:
+The Hugging Face dataset repository is public:
 
 [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
 
@@ -14,13 +14,15 @@ The companion technical report is hosted as a latest-draft PDF on Google Drive:
 
 The full public dataset is distributed through Hugging Face. This directory contains the public Stage 1 overview and the reproducibility pipeline code; dataset-card content, release notes, downloadable data artifacts, and report drafts should live outside Git with stable links.
 
+The Stage 1 dataset is also the training foundation for the first public Stage 2 model, [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1).
+
 ## Research Lineage
 
 The data-collection idea behind this release builds on two earlier lines of our work: **Reef: A Framework for Collecting Real-World Vulnerabilities and Fixes** for real-world vulnerability/fix collection, and **API-guided Dataset Synthesis to Finetune Large Code Models** for structured code-data synthesis. RealMythos adapts these ideas to reasoning-data construction, PoC-aware evaluation, and staged open release infrastructure.
 
 The RealMythos technical report will also be made available as an arXiv preprint; the arXiv link will be added once available.
 
-## Planned Contents
+## Release Contents
 
 - Dataset schema
 - Example records
@@ -30,6 +32,7 @@ The RealMythos technical report will also be made available as an arXiv preprint
 - Release manifest and checksums
 - Responsible-use notes
 - Reproducibility pipeline code under [`pipeline/`](pipeline/)
+- Stage 2 model linkage through [pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
 
 ## Release Goals
 

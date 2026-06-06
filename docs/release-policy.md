@@ -31,6 +31,16 @@ Each public release should include:
 | Stable technical reports | arXiv, Zenodo, or GitHub Releases after version freeze |
 | Small metadata artifacts | GitHub repository or GitHub Releases |
 
+## Current Public Artifacts
+
+| Artifact | Location | Notes |
+|---|---|---|
+| Stage 1 dataset | [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) | CVE-grounded C/C++ security reasoning dataset |
+| Stage 2 model | [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1) | Full-parameter SFT of Qwen3.5-9B trained on the Stage 1 dataset |
+| Technical report draft | [Google Drive latest draft](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) | Draft location before a stable arXiv or archival release |
+
 ## Mutation Policy
 
 Released artifacts should not be silently overwritten. If a public artifact changes, publish a new version or clearly document the correction.
+
+Model checkpoints should be treated as immutable public artifacts. New training runs, safety revisions, or evaluation-backed improvements should be published as new model versions rather than replacing `pocwriter-v1` without notice.

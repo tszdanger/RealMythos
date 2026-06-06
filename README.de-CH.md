@@ -3,7 +3,9 @@
 Sprachen: [English](README.md) | [简体中文](README.zh-CN.md) | [한국어](README.ko.md) | [Deutsch (Schweiz)](README.de-CH.md)
 
 [![Stage 1](https://img.shields.io/badge/Stage%201-Dataset%20Complete-2ea44f)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+[![Stage 2](https://img.shields.io/badge/Stage%202-Model%20Released-2ea44f)](https://huggingface.co/RealMythos/pocwriter-v1)
 [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-RealMythosReasoning-ffcc4d)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+[![Hugging Face Model](https://img.shields.io/badge/Hugging%20Face-pocwriter--v1-ffcc4d)](https://huggingface.co/RealMythos/pocwriter-v1)
 [![Technical Report](https://img.shields.io/badge/Technical%20Report-Google%20Drive%20Draft-b31b1b)](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing)
 [![Roadmap](https://img.shields.io/badge/Roadmap-4%20Stages-0969da)](ROADMAP.md)
 [![Responsible Use](https://img.shields.io/badge/Responsible%20Use-Documented-6e7781)](docs/responsible-use.md)
@@ -19,19 +21,25 @@ Unser Ziel ist es, fortgeschrittenes Security Reasoning fairer, transparenter un
 | Element | Aktueller Stand |
 |---|---|
 | Primäres Artefakt | [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) |
+| Primäres Modell | [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1), ein Full-Parameter-SFT von [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) |
 | GitHub-Repository | [tszdanger/RealMythos](https://github.com/tszdanger/RealMythos) |
 | Technischer Bericht | [Aktueller Entwurf auf Google Drive](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) |
 | Umfang von Stage 1 | 6'159 CVE-verknüpfte C/C++ Security-Reasoning-Datensätze |
-| Release-Fokus | SFT-fähige Reasoning-Daten, PoC-aware Antworten, Qualitätssignale und Responsible-Use-Dokumentation |
+| Release-Fokus | SFT-fähige Reasoning-Daten, ein offenes PoC-writing Security-Reasoning-Modell, Qualitätssignale und Responsible-Use-Dokumentation |
 | Reproduzierbarkeitscode | [`stage1-dataset/pipeline/`](stage1-dataset/pipeline/) |
 | Roadmap | Vierstufiger Weg von Daten zu Modellen, reproduzierbaren Umgebungen und Scaffold-basierten Traces |
+
+## Timeline
+
+- [2026/06]: Stage-2-Modell [pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1) auf Hugging Face veröffentlicht.
+- [2026/05]: Stage-1-Datensatz [RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) auf Hugging Face veröffentlicht.
 
 ## Aktueller Stand
 
 | Stage | Fokus | Design fertig | Entwicklung fertig | Interne Prüfung fertig | Veröffentlicht |
 |---|---|:---:|:---:|:---:|:---:|
 | Stage 1 | Security-Reasoning-Datensatz | yes | yes | yes | yes |
-| Stage 2 | Offenes Security-Reasoning-Modell | yes | yes | yes | no |
+| Stage 2 | Offenes Security-Reasoning-Modell | yes | yes | yes | yes |
 | Stage 3 | Reproduzierbare Softwareumgebungen | yes | no | no | no |
 | Stage 4 | Scaffold-basierte Trace-Sammlung | no | no | no | no |
 
@@ -51,6 +59,16 @@ Wichtige Eigenschaften:
 - PoC-orientierte Evaluationsmetadaten bleiben als Qualitätssignal erhalten.
 - Datensatz, Pipeline, Roadmap und Responsible-Use-Policy werden gemeinsam veröffentlicht.
 
+## Stage 2 Modell
+
+Das Stage-2-Modell ist auf Hugging Face veröffentlicht:
+
+[RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
+
+`pocwriter-v1` ist ein Full-Parameter-Supervised-Fine-Tune von **Qwen3.5-9B**, trainiert auf dem Stage-1-Datensatz RealMythosReasoning. Es ist für autorisierte Security-Research-Szenarien gedacht, darunter C/C++-Schwachstellenanalyse, PoC-Entwürfe in kontrollierten Umgebungen sowie Triage- und Write-up-Unterstützung.
+
+Das Modell ist ein frühes öffentliches Checkpoint-Modell. Alle Ausgaben müssen manuell geprüft werden; generierte PoCs dürfen nur in explizit autorisierten, kontrollierten Umgebungen verwendet werden. Nutzungshinweise und Einschränkungen stehen in [`stage2-model/README.md`](stage2-model/README.md) und in der [Model Card](https://huggingface.co/RealMythos/pocwriter-v1).
+
 ## Forschungslinie
 
 Die Datenerhebung von RealMythos baut auf zwei früheren Arbeiten auf: **Reef: A Framework for Collecting Real-World Vulnerabilities and Fixes** (ASE 2023) und **API-guided Dataset Synthesis to Finetune Large Code Models** (OOPSLA 2025). RealMythos erweitert diese Ideen in Richtung Security-Reasoning-Daten, Modelltraining, reproduzierbare Umgebungen und Multi-Agent-Trace-Infrastruktur.
@@ -63,6 +81,8 @@ Die Datenerhebung von RealMythos baut auf zwei früheren Arbeiten auf: **Reef: A
 | [Stage 1 Technical Report Draft](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) | Aktueller Berichtsentwurf ausserhalb von Git |
 | [Stage 1 Dataset Notes](stage1-dataset/README.md) | Hinweise zu Datenrelease und Distribution |
 | [Stage 1 Pipeline](stage1-dataset/pipeline/README.md) | Reproduzierbarkeitscode und Ausführungsanleitung |
+| [Stage 2 Model Notes](stage2-model/README.md) | Modellrelease, vorgesehene Nutzung, Einschränkungen und Inferenzbeispiel |
+| [pocwriter-v1 Model Card](https://huggingface.co/RealMythos/pocwriter-v1) | Öffentliches Modellartefakt auf Hugging Face |
 | [Responsible Use](docs/responsible-use.md) | Vorgesehene Nutzung und ausgeschlossene Nutzung |
 | [Authors and Maintainers](AUTHORS.md) | Beteiligte und Hinweis zur Unabhängigkeit des Projekts |
 

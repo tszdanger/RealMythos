@@ -3,7 +3,9 @@
 Languages: [English](README.md) | [简体中文](README.zh-CN.md) | [한국어](README.ko.md) | [Deutsch (Schweiz)](README.de-CH.md)
 
 [![Stage 1](https://img.shields.io/badge/Stage%201-Dataset%20Complete-2ea44f)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+[![Stage 2](https://img.shields.io/badge/Stage%202-Model%20Released-2ea44f)](https://huggingface.co/RealMythos/pocwriter-v1)
 [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-RealMythosReasoning-ffcc4d)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+[![Hugging Face Model](https://img.shields.io/badge/Hugging%20Face-pocwriter--v1-ffcc4d)](https://huggingface.co/RealMythos/pocwriter-v1)
 [![Technical Report](https://img.shields.io/badge/Technical%20Report-Google%20Drive%20Draft-b31b1b)](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing)
 [![Roadmap](https://img.shields.io/badge/Roadmap-4%20Stages-0969da)](ROADMAP.md)
 [![Responsible Use](https://img.shields.io/badge/Responsible%20Use-Documented-6e7781)](docs/responsible-use.md)
@@ -18,13 +20,19 @@ Our goal is to make advanced security reasoning **fairer, more inspectable, and 
 
 | Item | Current state |
 |---|---|
-| Primary artifact | [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) |
+| Primary artifacts | [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) and [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1) |
 | GitHub repository | [tszdanger/RealMythos](https://github.com/tszdanger/RealMythos) |
 | Technical report | [Latest draft on Google Drive](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) |
 | Stage 1 scope | 6,159 CVE-linked C/C++ security reasoning records |
-| Release focus | SFT-ready reasoning data, PoC-aware responses, quality signals, and responsible-use documentation |
+| Stage 2 model | Full-parameter SFT of [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B), released as [pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1) |
+| Release focus | SFT-ready reasoning data, an open PoC-writing security reasoning model, quality signals, and responsible-use documentation |
 | Reproducibility code | [`stage1-dataset/pipeline/`](stage1-dataset/pipeline/) |
 | Roadmap | Four-stage path from data to models, reproducible environments, and scaffold-based traces |
+
+## Timeline
+
+- [2026/06]: Released the Stage 2 [pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1) model on Hugging Face.
+- [2026/05]: Released the Stage 1 [RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) dataset on Hugging Face.
 
 ## Why RealMythos
 
@@ -94,7 +102,7 @@ Legend: ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-sq
 | Stage | Focus | Design Complete | Development Complete | Internal Review Complete | Released |
 |---|---|:---:|:---:|:---:|:---:|
 | Stage 1 | Security reasoning dataset | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) |
-| Stage 2 | Open security reasoning model | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | - |
+| Stage 2 | Open security reasoning model | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) |
 | Stage 3 | Reproducible software environments | ![Done](https://img.shields.io/badge/%E2%9C%93-Done-2ea44f?style=flat-square) | - | - | - |
 | Stage 4 | Scaffold-based trace collection | - | - | - | - |
 
@@ -143,6 +151,25 @@ Legend: :white_check_mark: supported / :x: not included / :heavy_minus_sign: not
 
 The full dataset is hosted through **Hugging Face**. This GitHub repository hosts documentation, schemas, release notes, reports, and reproducibility-oriented project materials.
 
+## Stage 2 Model
+
+The public **Stage 2 model** is hosted on Hugging Face:
+
+[RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
+
+`pocwriter-v1` is a full-parameter supervised fine-tune of **Qwen3.5-9B** trained on the Stage 1 RealMythosReasoning dataset. It is specialized for authorized security research tasks such as C/C++ vulnerability analysis, PoC drafting for controlled validation, and triage/write-up assistance.
+
+| Item | Current value |
+|---|---|
+| Base model | [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) |
+| Training data | [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) |
+| Method | Full-parameter supervised fine-tuning |
+| Framework | LLaMA-Factory with DeepSpeed ZeRO |
+| Checkpoint | Stage-1 SFT checkpoint 748 |
+| License | Apache-2.0 |
+
+The model is an early public checkpoint. Outputs should be manually verified, and generated PoCs should only be used in authorized, controlled environments. See [`stage2-model/README.md`](stage2-model/README.md) and the [model card](https://huggingface.co/RealMythos/pocwriter-v1) for usage notes and limitations.
+
 ## Quick Links
 
 | Resource | Purpose |
@@ -151,6 +178,8 @@ The full dataset is hosted through **Hugging Face**. This GitHub repository host
 | [Stage 1 Technical Report Draft](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) | Latest draft hosted outside Git |
 | [Stage 1 Dataset Notes](stage1-dataset/README.md) | Dataset release plan and distribution notes |
 | [Stage 1 Pipeline](stage1-dataset/pipeline/README.md) | Reproducibility code and execution guidance |
+| [Stage 2 Model Notes](stage2-model/README.md) | Model release summary, intended use, and inference example |
+| [pocwriter-v1 Model Card](https://huggingface.co/RealMythos/pocwriter-v1) | Public model artifact and model-card metadata |
 | [Responsible Use](docs/responsible-use.md) | Intended-use and out-of-scope-use boundaries |
 | [Release Policy](docs/release-policy.md) | Versioning, artifact, and publication policy |
 | [Authors and Maintainers](AUTHORS.md) | Participants and independent-project notice |
@@ -192,6 +221,7 @@ The full dataset is hosted through **Hugging Face**. This GitHub repository host
     |-- index.md
     |-- roadmap.md
     |-- stage1-dataset.md
+    |-- stage2-model.md
     |-- responsible-use.md
     |-- release-policy.md
     |-- repository-organization.md
@@ -209,7 +239,6 @@ This repository intentionally does not place large dataset files or model checkp
 | Participant | Affiliation | Primary role |
 |---|---|---|
 | Zongjie Li | HKUST | Project lead |
-| Liwen Wang | HKUST | Dataset construction |
 | Chaozheng Wang | CUHK | Model training and evaluation |
 | Zimo Ji | HKUST | Reproducibility infrastructure |
 

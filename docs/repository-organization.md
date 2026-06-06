@@ -5,11 +5,13 @@ title: Repository Organization
 
 # Repository Organization
 
-The initial public release will use one GitHub repository as the main entry point, with Hugging Face used for large dataset distribution.
+The public RealMythos release uses one GitHub repository as the main documentation entry point, with Hugging Face used for large dataset and model distribution.
 
-The Stage 1 dataset repository is:
+The current Hugging Face repositories are:
 
 [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+
+[RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
 
 The companion GitHub repository and report are:
 
@@ -32,7 +34,7 @@ The companion GitHub repository and report are:
 
 ## Rationale
 
-Using one repository at the beginning keeps the project easy to discover and review. Stage-specific directories preserve boundaries between dataset documentation, model release materials, reproducibility environments, and trace scaffold planning.
+Using one repository at the beginning keeps the project easy to discover and review. Stage-specific directories preserve boundaries between dataset documentation, model release materials, reproducibility environments, and trace scaffold planning. Large artifacts remain outside Git: datasets and model checkpoints are published through Hugging Face, while Git tracks public documentation, code, release notes, and policy material.
 
 As the project grows, mature stages can be split into separate repositories under a RealMythos GitHub organization.
 

@@ -3,7 +3,9 @@
 语言: [English](README.md) | [简体中文](README.zh-CN.md) | [한국어](README.ko.md) | [Deutsch (Schweiz)](README.de-CH.md)
 
 [![Stage 1](https://img.shields.io/badge/Stage%201-Dataset%20Complete-2ea44f)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+[![Stage 2](https://img.shields.io/badge/Stage%202-Model%20Released-2ea44f)](https://huggingface.co/RealMythos/pocwriter-v1)
 [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-RealMythosReasoning-ffcc4d)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+[![Hugging Face Model](https://img.shields.io/badge/Hugging%20Face-pocwriter--v1-ffcc4d)](https://huggingface.co/RealMythos/pocwriter-v1)
 [![Technical Report](https://img.shields.io/badge/Technical%20Report-Google%20Drive%20Draft-b31b1b)](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing)
 [![Roadmap](https://img.shields.io/badge/Roadmap-4%20Stages-0969da)](ROADMAP.md)
 [![Responsible Use](https://img.shields.io/badge/Responsible%20Use-Documented-6e7781)](docs/responsible-use.md)
@@ -19,19 +21,25 @@ RealMythos 是一个分阶段推进的开放项目，目标是以公开数据、
 | 项目 | 当前状态 |
 |---|---|
 | 主要数据集 | [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) |
+| 主要模型 | [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)，基于 [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) 的全参数 SFT |
 | GitHub 仓库 | [tszdanger/RealMythos](https://github.com/tszdanger/RealMythos) |
 | 技术报告 | [Google Drive 最新草稿](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) |
 | Stage 1 范围 | 6,159 条 CVE 关联的 C/C++ 安全推理记录 |
-| 发布重点 | SFT 数据、PoC-aware 响应、质量信号和 responsible-use 文档 |
+| 发布重点 | SFT 数据、开放 PoC-writing 安全推理模型、质量信号和 responsible-use 文档 |
 | 可复现代码 | [`stage1-dataset/pipeline/`](stage1-dataset/pipeline/) |
 | Roadmap | 从数据到模型、可复现环境和 scaffold trace 的四阶段计划 |
+
+## 时间线
+
+- [2026/06]: 在 Hugging Face 发布 Stage 2 [pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1) 模型。
+- [2026/05]: 在 Hugging Face 发布 Stage 1 [RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) 数据集。
 
 ## 当前进展
 
 | Stage | 重点 | 设计完成 | 开发完成 | 内部检查完成 | 已发布 |
 |---|---|:---:|:---:|:---:|:---:|
 | Stage 1 | 安全推理数据集 | yes | yes | yes | yes |
-| Stage 2 | 开放安全推理模型 | yes | yes | yes | no |
+| Stage 2 | 开放安全推理模型 | yes | yes | yes | yes |
 | Stage 3 | 可复现软件环境 | yes | no | no | no |
 | Stage 4 | Scaffold trace 收集 | no | no | no | no |
 
@@ -51,6 +59,16 @@ Stage 1 旨在作为 RealMythos 后续模型训练、可复现环境和 trace �
 - 保留 PoC-oriented 质量评估元数据。
 - 数据集、pipeline、roadmap 和 responsible-use policy 一起发布。
 
+## Stage 2 模型
+
+Stage 2 模型已托管在 Hugging Face:
+
+[RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
+
+`pocwriter-v1` 是基于 **Qwen3.5-9B** 的全参数监督微调模型，训练数据为 Stage 1 的 RealMythosReasoning。它面向授权安全研究场景，包括 C/C++ 漏洞分析、受控环境中的 PoC 草拟、漏洞 triage 和报告辅助。
+
+该模型是早期公开 checkpoint。所有输出都应人工核验，生成的 PoC 只应用于拥有授权的受控环境。更多使用方式和限制见 [`stage2-model/README.md`](stage2-model/README.md) 与 [模型卡](https://huggingface.co/RealMythos/pocwriter-v1)。
+
 ## 研究来源
 
 RealMythos 的数据收集思路受到我们此前两条工作的影响：ASE 2023 的 **Reef: A Framework for Collecting Real-World Vulnerabilities and Fixes**，以及 OOPSLA 2025 的 **API-guided Dataset Synthesis to Finetune Large Code Models**。RealMythos 将这些思路扩展到安全推理数据、模型训练、可复现环境和多 agent trace 基础设施。
@@ -63,6 +81,8 @@ RealMythos 的数据收集思路受到我们此前两条工作的影响：ASE 20
 | [Stage 1 技术报告草稿](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) | Git 外部托管的最新报告草稿 |
 | [Stage 1 数据集说明](stage1-dataset/README.md) | 数据发布计划和分发说明 |
 | [Stage 1 Pipeline](stage1-dataset/pipeline/README.md) | 可复现代码和运行说明 |
+| [Stage 2 模型说明](stage2-model/README.md) | 模型发布、用途、限制和推理示例 |
+| [pocwriter-v1 模型卡](https://huggingface.co/RealMythos/pocwriter-v1) | Hugging Face 上的公开模型 artifact |
 | [Responsible Use](docs/responsible-use.md) | 适用范围和不适用范围 |
 | [Authors and Maintainers](AUTHORS.md) | 参与者和独立项目声明 |
 

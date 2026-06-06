@@ -8,6 +8,7 @@ title: Home
 Open, reproducible security reasoning from real-world vulnerabilities.
 
 [Stage 1 Dataset](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) |
+[Stage 2 Model](https://huggingface.co/RealMythos/pocwriter-v1) |
 [Report Draft](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) |
 [Roadmap](roadmap.md) |
 [Responsible Use](responsible-use.md) |
@@ -25,18 +26,22 @@ RealMythos builds on ideas from two earlier lines of work: Reef, our ASE 2023 wo
 
 ## Current Focus
 
-Stage 1 is complete. The dataset release is hosted on Hugging Face, with companion documentation and pipeline code in this repository.
+Stage 1 and Stage 2 are now public. The dataset and first model release are hosted on Hugging Face, with companion documentation and pipeline code in this repository.
 
 [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
 
+[RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
+
 The Stage 1 technical report documents the data-collection process, quality-control decisions, and responsible-release considerations. The [latest draft](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) is hosted through Google Drive, and a stable arXiv preprint will be added once available.
+
+`pocwriter-v1` is an early public Stage 2 checkpoint: a full-parameter SFT of Qwen3.5-9B trained on RealMythosReasoning for authorized vulnerability reasoning and controlled PoC drafting.
 
 ## Project Map
 
 | Stage | Focus | Status |
 |---|---|---|
-| Stage 1 | Security reasoning dataset | Completed; release prepared |
-| Stage 2 | Open security reasoning model | Completed internally; packaging in progress |
+| Stage 1 | Security reasoning dataset | Published |
+| Stage 2 | Open security reasoning model | Published as [pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1) |
 | Stage 3 | Reproducible software environments | Planned |
 | Stage 4 | Scaffold-based trace collection | Design phase |
 
@@ -44,6 +49,7 @@ The Stage 1 technical report documents the data-collection process, quality-cont
 
 - [Roadmap](roadmap.md)
 - [Stage 1 Dataset](stage1-dataset.md)
+- [Stage 2 Model](stage2-model.md)
 - [Stage 1 Technical Report latest draft](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing)
 - [Responsible Use](responsible-use.md)
 - [Release Policy](release-policy.md)

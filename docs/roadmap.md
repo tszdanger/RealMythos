@@ -9,17 +9,21 @@ RealMythos treats Claude Mythos-level cybersecurity capability as a full archite
 
 ## Stage 1: Security Reasoning Dataset
 
-**Status:** Completed; Hugging Face release prepared
+**Status:** Completed; Hugging Face release published
+
 **Dataset:** [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
 
 Stage 1 provides the foundational security reasoning dataset derived from real-world vulnerability data.
 
 ## Stage 2: Open Security Reasoning Model
 
-**Status:** Completed internally; public packaging in progress  
-**Target:** Late May 2026
+**Status:** Public model released
 
-Stage 2 releases an open model trained using the Stage 1 dataset. Internal experiments show an average performance improvement of more than 25% over the selected baseline setup. Public claims will be finalized with the evaluation configuration.
+**Model:** [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
+
+Stage 2 releases an open model trained using the Stage 1 dataset. The first public checkpoint, `pocwriter-v1`, is a full-parameter SFT of Qwen3.5-9B for authorized security reasoning, C/C++ vulnerability analysis, and controlled PoC drafting.
+
+Internal performance claims should be finalized only with exact evaluation configuration, baseline definitions, and public reproducibility artifacts.
 
 ## Stage 3: Reproducible Software Environments
 

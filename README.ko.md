@@ -3,7 +3,9 @@
 언어: [English](README.md) | [简体中文](README.zh-CN.md) | [한국어](README.ko.md) | [Deutsch (Schweiz)](README.de-CH.md)
 
 [![Stage 1](https://img.shields.io/badge/Stage%201-Dataset%20Complete-2ea44f)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+[![Stage 2](https://img.shields.io/badge/Stage%202-Model%20Released-2ea44f)](https://huggingface.co/RealMythos/pocwriter-v1)
 [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-RealMythosReasoning-ffcc4d)](https://huggingface.co/datasets/RealMythos/RealMythosReasoning)
+[![Hugging Face Model](https://img.shields.io/badge/Hugging%20Face-pocwriter--v1-ffcc4d)](https://huggingface.co/RealMythos/pocwriter-v1)
 [![Technical Report](https://img.shields.io/badge/Technical%20Report-Google%20Drive%20Draft-b31b1b)](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing)
 [![Roadmap](https://img.shields.io/badge/Roadmap-4%20Stages-0969da)](ROADMAP.md)
 [![Responsible Use](https://img.shields.io/badge/Responsible%20Use-Documented-6e7781)](docs/responsible-use.md)
@@ -19,19 +21,25 @@ RealMythos는 공개 데이터, 문서화된 방법, 재현 가능한 인프라�
 | 항목 | 현재 상태 |
 |---|---|
 | 주요 아티팩트 | [RealMythos/RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) |
+| 주요 모델 | [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1), [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) full-parameter SFT |
 | GitHub 저장소 | [tszdanger/RealMythos](https://github.com/tszdanger/RealMythos) |
 | 기술 보고서 | [Google Drive 최신 초안](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) |
 | Stage 1 범위 | CVE와 연결된 C/C++ 보안 추론 레코드 6,159개 |
-| 릴리스 초점 | SFT용 데이터, PoC-aware 응답, 품질 신호, responsible-use 문서 |
+| 릴리스 초점 | SFT용 데이터, 공개 PoC-writing 보안 추론 모델, 품질 신호, responsible-use 문서 |
 | 재현 코드 | [`stage1-dataset/pipeline/`](stage1-dataset/pipeline/) |
 | Roadmap | 데이터, 모델, 재현 환경, scaffold trace로 이어지는 네 단계 계획 |
+
+## 타임라인
+
+- [2026/06]: Stage 2 [pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1) 모델을 Hugging Face에 공개했습니다.
+- [2026/05]: Stage 1 [RealMythosReasoning](https://huggingface.co/datasets/RealMythos/RealMythosReasoning) 데이터셋을 Hugging Face에 공개했습니다.
 
 ## 현재 진행 상황
 
 | Stage | 초점 | 설계 완료 | 개발 완료 | 내부 검토 완료 | 공개됨 |
 |---|---|:---:|:---:|:---:|:---:|
 | Stage 1 | 보안 추론 데이터셋 | yes | yes | yes | yes |
-| Stage 2 | 공개 보안 추론 모델 | yes | yes | yes | no |
+| Stage 2 | 공개 보안 추론 모델 | yes | yes | yes | yes |
 | Stage 3 | 재현 가능한 소프트웨어 환경 | yes | no | no | no |
 | Stage 4 | Scaffold 기반 trace 수집 | no | no | no | no |
 
@@ -51,6 +59,16 @@ Stage 1은 이후 모델 학습, 재현 가능한 환경 구축, trace 수집을
 - PoC-oriented 품질 평가 메타데이터를 포함합니다.
 - 데이터셋, pipeline, roadmap, responsible-use policy를 함께 공개합니다.
 
+## Stage 2 모델
+
+Stage 2 모델은 Hugging Face에 공개되어 있습니다.
+
+[RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1)
+
+`pocwriter-v1`은 **Qwen3.5-9B**를 기반으로 한 full-parameter supervised fine-tune 모델이며, Stage 1 RealMythosReasoning 데이터셋으로 학습되었습니다. 승인된 보안 연구, C/C++ 취약점 분석, 통제된 환경에서의 PoC 초안 작성, triage와 write-up 보조를 위한 모델입니다.
+
+이 모델은 초기 공개 checkpoint입니다. 모든 출력은 수동으로 검증해야 하며, 생성된 PoC는 명시적 권한이 있는 통제된 환경에서만 사용해야 합니다. 사용 방법과 제한 사항은 [`stage2-model/README.md`](stage2-model/README.md) 및 [모델 카드](https://huggingface.co/RealMythos/pocwriter-v1)를 참고하세요.
+
 ## 연구적 배경
 
 RealMythos의 데이터 수집 철학은 두 가지 선행 연구에서 영향을 받았습니다. 하나는 ASE 2023의 **Reef: A Framework for Collecting Real-World Vulnerabilities and Fixes**이고, 다른 하나는 OOPSLA 2025의 **API-guided Dataset Synthesis to Finetune Large Code Models**입니다. RealMythos는 이 아이디어를 보안 추론 데이터, 모델 학습, 재현 가능한 환경, multi-agent trace 인프라로 확장합니다.
@@ -63,6 +81,8 @@ RealMythos의 데이터 수집 철학은 두 가지 선행 연구에서 영향�
 | [Stage 1 기술 보고서 초안](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) | Git 외부에 보관되는 최신 보고서 초안 |
 | [Stage 1 데이터셋 노트](stage1-dataset/README.md) | 데이터 릴리스 계획과 배포 설명 |
 | [Stage 1 Pipeline](stage1-dataset/pipeline/README.md) | 재현 코드와 실행 가이드 |
+| [Stage 2 Model Notes](stage2-model/README.md) | 모델 릴리스, 의도한 사용, 제한 사항, 추론 예시 |
+| [pocwriter-v1 Model Card](https://huggingface.co/RealMythos/pocwriter-v1) | Hugging Face의 공개 모델 아티팩트 |
 | [Responsible Use](docs/responsible-use.md) | 의도한 사용 범위와 제외되는 사용 범위 |
 | [Authors and Maintainers](AUTHORS.md) | 참여자와 독립 프로젝트 고지 |
 

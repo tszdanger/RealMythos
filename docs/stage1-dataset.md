@@ -19,7 +19,9 @@ The Stage 1 dataset is the first RealMythos release artifact.
 | Technical report | [Latest draft on Google Drive](https://drive.google.com/drive/folders/15QTlPNgEjfR-rOYg1zI0YCjT5VL9EfUi?usp=sharing) |
 | Reproducibility pipeline | [Stage 1 pipeline](../stage1-dataset/pipeline/) |
 
-The Hugging Face repository hosts the dataset files and dataset card. The GitHub repository hosts release documentation, responsible-use notes, and reproducibility-oriented pipeline code. The technical report draft will be hosted through Google Drive during pre-arXiv iteration.
+The Hugging Face repository hosts the dataset files and dataset card. The GitHub repository hosts release documentation, responsible-use notes, and reproducibility-oriented pipeline code. The technical report draft is hosted through Google Drive during pre-arXiv iteration.
+
+The Stage 1 dataset is also the training dataset for the first public Stage 2 model release, [RealMythos/pocwriter-v1](https://huggingface.co/RealMythos/pocwriter-v1).
 
 ## Research Lineage
 
@@ -37,6 +39,7 @@ The Stage 1 release includes:
 - Dataset card and responsible-use notes
 - Technical report draft metadata
 - Versioned manifests and checksums
+- Training foundation for the Stage 2 `pocwriter-v1` model
 
 ## GitHub Materials
 
