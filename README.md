@@ -239,6 +239,7 @@ This repository intentionally does not place large dataset files or model checkp
 | Participant | Affiliation | Primary role |
 |---|---|---|
 | Zongjie Li | HKUST | Project lead |
+| Liwen Wang | HKUST | Dataset construction |
 | Chaozheng Wang | CUHK | Model training and evaluation |
 | Zimo Ji | HKUST | Reproducibility infrastructure |
 
